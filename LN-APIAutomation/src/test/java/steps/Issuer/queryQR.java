@@ -164,9 +164,11 @@ public class queryQR {
 
     @Then("the error message telling that the QR Payload is missing will appear")
     public void theErrorMessageTellingThatTheQRPayloadIsMissingWillAppear() {
-        String response_code;
-        response_code=QueryQRBuilder.getResponseQueryDynamicQR().then().extract().path("response_code");
-        Assert.assertEquals(response_code,"3");
+        QueryQRBuilder.getErrorInformation();
+        //Assert
+        Assert.assertEquals(QueryQRBuilder.getActualType(), "error","Test Case: queryDynamicQRWithMandatoryQRPayload");
+        Assert.assertEquals(QueryQRBuilder.getActualErrorCode(), ErrorCodes.MANDATORY_FIELD_MISSING_CODE,"Test Case: queryDynamicQRWithMandatoryQRPayload");
+        Assert.assertEquals(QueryQRBuilder.getActualErrorDescription(),"qr_payload"+" is mandatory","Test Case: queryDynamicQRWithMandatoryQRPayload");
 
     }
 
